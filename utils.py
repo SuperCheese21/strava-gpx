@@ -7,18 +7,21 @@ def get_coords(trkpt):
     return lon, lat
 
 
+def get_dist(trkpt1, trkpt2):
+    p1 = get_coords(trkpt1)
+    p2 = get_coords(trkpt2)
+    return distance_between_points(p1, p2)
+
+
 def get_time_sec(string):
     time_split = string.split(':')
     seconds = 60 * int(time_split[0]) + int(time_split[1])
     return seconds
 
 
-def get_total_distance(trkseg):
-    total_distance = 0
-    trkpt_list = zip(list(trkseg), list(trkseg)[1:])
+def get_total_dist(trkpt_list):
+    total_dist = 0
     for prev_trkpt, current_trkpt in trkpt_list:
-        p1 = get_coords(prev_trkpt)
-        p2 = get_coords(current_trkpt)
-        d = distance_between_points(p1, p2)
-        total_distance += d
-    return total_distance
+        dist = get_dist(prev_trkpt, current_trkpt)
+        total_dist += dist
+    return total_dist
