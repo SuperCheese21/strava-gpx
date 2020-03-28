@@ -1,4 +1,10 @@
 from great_circle_calculator.great_circle_calculator import distance_between_points
+import xml.etree.ElementTree as ElementTree
+
+
+def add_time(trkpt, time):
+    time_element = ElementTree.SubElement(trkpt, 'time')
+    time_element.text = time.isoformat() + 'Z'
 
 
 def get_coords(trkpt):
